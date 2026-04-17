@@ -1,0 +1,97 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Inicio</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{% static 'core/css/estilos.css' %}" />
+    <script src="{% static 'core/js/validaciones.js' %}" defer></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-custom px-4">
+      <a class="navbar-brand fw-bold" href="{% url 'home' %}">
+        <img src="{% static 'core/img/logo.png' %}" alt="Logo" height="40" />
+        PanoramasPA
+      </a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#nav"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home' %}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'perfil' %}">Mi Perfil</a>
+          </li>
+          <li class="nav-item d-none" id="adminLink">
+            <a class="nav-link" href="{% url 'admin_panel' %}">Admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-danger" href="{% url 'logout' %}">Salir</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container mt-4">
+      <div class="text-center mb-3">
+        <img src="{% static 'core/img/logo.png' %}" width="150" alt="Logo" />
+      </div>
+
+      <h2 class="mb-4 text-center">Panoramas en Puente Alto</h2>
+
+      <a href="{% url 'feria_emprendedores' %}" class="text-decoration-none text-dark">
+        <div class="card card-panorama p-3 mb-3">
+          <h4>Feria de Emprendedores</h4>
+          <p>📍 Plaza de Puente Alto</p>
+          <p>🕒 Sábado 10:00 - 18:00</p>
+          <small class="text-primary">Ver fotos y comentarios →</small>
+        </div>
+      </a>
+
+      <a href="{% url 'trekking' %}" class="text-decoration-none text-dark">
+        <div class="card card-panorama p-3 mb-3">
+          <h4>Trekking Quebrada de Macul</h4>
+          <p>📍 Entrada Av. Larraín</p>
+          <p>🕒 Domingo 08:00</p>
+          <small class="text-primary">Ver fotos y comentarios →</small>
+        </div>
+      </a>
+
+      <a href="{% url 'concierto' %}" class="text-decoration-none text-dark">
+        <div class="card card-panorama p-3 mb-3">
+          <h4>Concierto al Aire Libre</h4>
+          <p>📍 Parque Municipal</p>
+          <p>🕒 Viernes 19:00</p>
+          <small class="text-primary">Ver fotos y comentarios →</small>
+        </div>
+      </a>
+
+      <a href="{% url 'feria_comida' %}" class="text-decoration-none text-dark">
+        <div class="card card-panorama p-3 mb-3">
+          <h4>Feria de Comida Chilena</h4>
+          <p>📍 Plaza de Puente Alto</p>
+          <p>🕒 Sábado 12:00 - 20:00</p>
+          <small class="text-primary">Ver fotos y comentarios →</small>
+        </div>
+      </a>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Feria de Comida Chilena</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{% static 'core/css/estilos.css' %}" />
+    <script src="{% static 'core/js/validaciones.js' %}" defer></script>
+  </head>
+
+  <body>
+   <nav class="navbar navbar-expand-lg navbar-custom px-4">
+  <a class="navbar-brand fw-bold" href="{% url 'home' %}">
+    <img
+      src="{% static 'core/img/logo.png' %}"
+      alt="Logo"
+      height="40"
+    />
+    PanoramasPA
+  </a>
+</nav>
+
+
+    <div class="container mt-4">
+      <h2 class="text-center mb-4">Feria de Comida Chilena</h2>
+
+      <div class="card mb-4">
+        <img
+          src="{% static 'core/img/comida_chilena_1.jpg' %}"
+          class="card-img-top"
+          alt="Feria de Emprendedores"
+        />
+
+        <div class="card-body">
+          <h5 class="card-title">
+            Foto subida por: <strong>Usuario registrado</strong>
+          </h5>
+          <p class="card-text">
+            Disfruta de los sabores auténticos de la comida chilena en la feria.
+          </p>
+        </div>
+      </div>
+
+      <div class="card p-3">
+        <h5>Comentarios</h5>
+
+        <div id="listaComentarios"></div>
+        <hr />
+
+        <form id="formComentario">
+          <textarea
+            id="comentarioTexto"
+            class="form-control mb-2"
+            placeholder="Escribe un comentario..."
+            required
+          ></textarea>
+          <button class="btn btn-custom w-100">Comentar</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+``
