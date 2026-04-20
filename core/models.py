@@ -15,3 +15,18 @@ class Perfil(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+# ==========================
+# MODELO DE NEGOCIO (CRUD)
+# ==========================
+class Panorama(models.Model):
+    titulo = models.CharField(max_length=100)
+    descripcion = models.TextField()
+    fecha = models.DateField()
+    lugar = models.CharField(max_length=100)
+    creador = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.titulo
+
