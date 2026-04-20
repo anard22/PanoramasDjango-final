@@ -3,6 +3,7 @@ Django settings for panoramaspa project.
 """
 
 from pathlib import Path
+import os
 
 # ==========================
 # BASE DIR
@@ -65,14 +66,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'panoramaspa.wsgi.application'
 
 # ==========================
-# DATABASE (ORACLE - THIN MODE )
+# DATABASE (ORACLE - THIN MODE)
 # ==========================
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'localhost/XE',      # SERVICE_NAME
-        'USER': 'TU_USUARIO_ORACLE', #  CAMBIA
-        'PASSWORD': 'TU_PASSWORD',  #  CAMBIA
+        'NAME': 'localhost/XE',
+        'USER': os.getenv('ORACLE_USER', 'TU_USUARIO_ORACLE'),
+        'PASSWORD': os.getenv('ORACLE_PASSWORD', 'TU_PASSWORD'),
     }
 }
 
@@ -105,3 +106,8 @@ STATIC_URL = 'static/'
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# ==========================
+# DEFAULT PK TYPE
+# ==========================
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
