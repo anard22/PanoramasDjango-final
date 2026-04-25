@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.contrib.auth.models import User, Group
 
-from .models import Perfil
+from .models import Perfil, Panorama
 from .forms import UsuarioForm, PerfilForm
 
 
@@ -23,6 +23,9 @@ def home(request):
 
 
 def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -41,10 +44,6 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
-
-
-def recuperar_contrasena(request):
-    return render(request, 'core/recuperar.html')
 
 
 # -------------------------
@@ -71,24 +70,27 @@ def registro(request):
             messages.success(request, 'Usuario registrado correctamente')
             return redirect('login')
 
-    else:
-        user_form = UsuarioForm()
-        perfil_form = PerfilForm()
-
-    return render(request, 'core/registro.html', {
-        'user_form': user_form,
-        'perfil_form': perfil_form
-    })
+    return render(request, 'core/registro.html')
 
 
 # -------------------------
-# Vistas protegidas
+# Perfil (EDITABLE REAL)
 # -------------------------
 @login_required
 def perfil(request):
+    if request.method == "POST":
+        perfil = request.user.perfil
+        perfil.telefono = request.POST.get("telefono")
+        perfil.direccion = request.POST.get("direccion")
+        perfil.save()
+        messages.success(request, "Perfil actualizado correctamente")
+
     return render(request, 'core/perfil.html')
 
 
+# -------------------------
+# Administración
+# -------------------------
 @login_required
 @user_passes_test(es_admin)
 def admin_panel(request):
@@ -134,7 +136,60 @@ def crear_usuario(request):
 
 
 # -------------------------
-# Panoramas (solo render)
+# CRUD DE PANORAMAS
+# -------------------------
+@login_required
+def listar_panoramas(request):
+    panoramas = Panorama.objects.all()
+    return render(request, 'core/listar_panoramas.html', {
+        'panoramas': panoramas
+    })
+
+
+@login_required
+def crear_panorama(request):
+    if request.method == 'POST':
+        Panorama.objects.create(
+            titulo=request.POST.get('titulo'),
+            descripcion=request.POST.get('descripcion'),
+            fecha=request.POST.get('fecha'),
+            lugar=request.POST.get('lugar'),
+            creador=request.user
+        )
+        messages.success(request, 'Panorama creado correctamente')
+        return redirect('listar_panoramas')
+
+    return render(request, 'core/crear_panorama.html')
+
+
+@login_required
+def editar_panorama(request, panorama_id):
+    panorama = Panorama.objects.get(id=panorama_id)
+
+    if request.method == 'POST':
+        panorama.titulo = request.POST.get('titulo')
+        panorama.descripcion = request.POST.get('descripcion')
+        panorama.fecha = request.POST.get('fecha')
+        panorama.lugar = request.POST.get('lugar')
+        panorama.save()
+        messages.success(request, 'Panorama actualizado correctamente')
+        return redirect('listar_panoramas')
+
+    return render(request, 'core/editar_panorama.html', {
+        'panorama': panorama
+    })
+
+
+@login_required
+def eliminar_panorama(request, panorama_id):
+    panorama = Panorama.objects.get(id=panorama_id)
+    panorama.delete()
+    messages.success(request, 'Panorama eliminado correctamente')
+    return redirect('listar_panoramas')
+
+
+# -------------------------
+# Panoramas informativos
 # -------------------------
 def feria_emprendedores(request):
     return render(request, 'core/feria-emprendedores.html')

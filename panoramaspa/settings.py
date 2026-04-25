@@ -68,12 +68,19 @@ WSGI_APPLICATION = 'panoramaspa.wsgi.application'
 # ==========================
 # DATABASE (ORACLE - THIN MODE)
 # ==========================
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.oracle',
+#       'NAME': 'localhost/XE',
+#        'USER': os.getenv('ORACLE_USER', 'TU_USUARIO_ORACLE'),
+#        'PASSWORD': os.getenv('ORACLE_PASSWORD', 'TU_PASSWORD'),
+#   }
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'localhost/XE',
-        'USER': os.getenv('ORACLE_USER', 'TU_USUARIO_ORACLE'),
-        'PASSWORD': os.getenv('ORACLE_PASSWORD', 'TU_PASSWORD'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
