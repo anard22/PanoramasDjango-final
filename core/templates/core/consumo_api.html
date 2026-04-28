@@ -1,0 +1,57 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Consumo API Externa</title>
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+</head>
+
+<body class="container mt-4">
+
+  <h2 class="mb-3">Categorías de Comidas (TheMealDB)</h2>
+
+  <button id="btnCargar" class="btn btn-primary mb-3">
+    Cargar categorías
+  </button>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+      </tr>
+    </thead>
+    <tbody id="tablaCategorias">
+    </tbody>
+  </table>
+
+  <script>
+    document.getElementById("btnCargar").addEventListener("click", () => {
+      fetch("https://www.themealdb.com/api/json/v1/1/categories.php")
+        .then(response => response.json())
+        .then(data => {
+          const tbody = document.getElementById("tablaCategorias");
+          tbody.innerHTML = "";
+
+          data.categories.forEach(cat => {
+            tbody.innerHTML += `
+              <tr>
+                <td>${cat.strCategory}</td>
+                <td>${cat.strCategoryDescription.substring(0, 120)}...</td>
+              </tr>
+            `;
+          });
+        })
+        .catch(error => {
+          alert("Error al consumir el servicio");
+        });
+    });
+  </script>
+
+</body>
+</html>

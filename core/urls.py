@@ -37,4 +37,7 @@ urlpatterns = [
     path('feria-comida/', views.feria_comida, name='feria_comida'),
     path('concierto/', views.concierto, name='concierto'),
     path('trekking/', views.trekking, name='trekking'),
+    
+    
+    path('consumo-api/', views.consumo_api, name='consumo_api'),
 ]

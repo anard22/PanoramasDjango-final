@@ -205,3 +205,7 @@ def concierto(request):
 
 def trekking(request):
     return render(request, 'core/trekking-quebrada.html')
+
+@login_required
+def consumo_api(request):
+    return render(request, 'core/consumo_api.html')
