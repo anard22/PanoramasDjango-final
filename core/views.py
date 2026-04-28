@@ -78,6 +78,8 @@ def registro(request):
 # -------------------------
 @login_required
 def perfil(request):
+    es_admin_flag = es_admin(request.user)
+
     if request.method == "POST":
         perfil = request.user.perfil
         perfil.telefono = request.POST.get("telefono")
@@ -85,7 +87,9 @@ def perfil(request):
         perfil.save()
         messages.success(request, "Perfil actualizado correctamente")
 
-    return render(request, 'core/perfil.html')
+    return render(request, 'core/perfil.html', {
+        'es_admin': es_admin_flag
+    })
 
 
 # -------------------------
@@ -206,6 +210,10 @@ def concierto(request):
 def trekking(request):
     return render(request, 'core/trekking-quebrada.html')
 
+
+# -------------------------
+# Consumo API externa (IL10)
+# -------------------------
 @login_required
 def consumo_api(request):
     return render(request, 'core/consumo_api.html')
