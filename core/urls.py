@@ -40,4 +40,7 @@ urlpatterns = [
 
     # Consumo API externa 
     path('consumo-api/', views.consumo_api, name='consumo_api'),
+    
+    # Eventos externos
+    path('eventos-externos/', views.eventos_externos, name='eventos_externos'),
 ]

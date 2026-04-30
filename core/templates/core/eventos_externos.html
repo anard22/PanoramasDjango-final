@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Eventos Externos</title>
+  https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css
+</head>
+
+<body class="container mt-4">
+
+  <h2>Eventos Externos (Servicio JSON)</h2>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Lugar</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody id="tabla-eventos">
+    </tbody>
+  </table>
+
+  <script>
+    fetch("https://my-json-server.typicode.com/anard22/panoramas-json/eventos")
+      .then(response => response.json())
+      .then(data => {
+        const tabla = document.getElementById("tabla-eventos");
+        data.forEach(evento => {
+          tabla.innerHTML += `
+            <tr>
+              <td>${evento.nombre}</td>
+              <td>${evento.lugar}</td>
+              <td>${evento.fecha}</td>
+            </tr>
+          `;
+        });
+      })
+      .catch(error => {
+        document.getElementById("tabla-eventos").innerHTML =
+          "<tr><td colspan='3'>No se pudo cargar el servicio externo</td></tr>";
+      });
+  </script>
+
+</body>
+</html>

@@ -217,3 +217,7 @@ def trekking(request):
 @login_required
 def consumo_api(request):
     return render(request, 'core/consumo_api.html')
+
+@login_required
+def eventos_externos(request):
+    return render(request, 'core/eventos_externos.html')
