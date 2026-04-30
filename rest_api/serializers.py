@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from core.models import Panorama
+from core.models import Panorama, Categoria
+
 
 class PanoramaSerializer(serializers.ModelSerializer):
     creador = serializers.StringRelatedField(read_only=True)
@@ -14,3 +15,9 @@ class PanoramaSerializer(serializers.ModelSerializer):
             'lugar',
             'creador',
         ]
+
+
+class CategoriaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Categoria
+        fields = ['id', 'nombre']
