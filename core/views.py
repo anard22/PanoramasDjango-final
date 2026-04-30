@@ -212,7 +212,7 @@ def trekking(request):
 
 
 # -------------------------
-# Consumo API externa (IL10)
+# Consumo API externa 
 # -------------------------
 @login_required
 def consumo_api(request):

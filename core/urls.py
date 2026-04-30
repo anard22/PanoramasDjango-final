@@ -20,7 +20,7 @@ urlpatterns = [
 
     # Usuario
     path('perfil/', views.perfil, name='perfil'),
-
+ 
     # Administración (protegidas por rol)
     path('admin-panel/', views.admin_panel, name='admin_panel'),
     path('usuarios/', views.listar_usuarios, name='listar_usuarios'),
@@ -38,6 +38,6 @@ urlpatterns = [
     path('concierto/', views.concierto, name='concierto'),
     path('trekking/', views.trekking, name='trekking'),
 
-    # Consumo API externa (IL10)
+    # Consumo API externa 
     path('consumo-api/', views.consumo_api, name='consumo_api'),
 ]
