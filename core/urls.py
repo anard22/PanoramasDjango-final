@@ -20,13 +20,13 @@ urlpatterns = [
 
     # Usuario
     path('perfil/', views.perfil, name='perfil'),
- 
+
     # Administración (protegidas por rol)
     path('admin-panel/', views.admin_panel, name='admin_panel'),
     path('usuarios/', views.listar_usuarios, name='listar_usuarios'),
     path('usuarios/crear/', views.crear_usuario, name='crear_usuario'),
 
-    # CRUD Panoramas
+    # CRUD Panoramas ✅ (CORREGIDO)
     path('panoramas/', views.listar_panoramas, name='listar_panoramas'),
     path('panoramas/crear/', views.crear_panorama, name='crear_panorama'),
     path('panoramas/editar/<int:panorama_id>/', views.editar_panorama, name='editar_panorama'),
@@ -38,9 +38,9 @@ urlpatterns = [
     path('concierto/', views.concierto, name='concierto'),
     path('trekking/', views.trekking, name='trekking'),
 
-    # Consumo API externa 
+    # Consumo API externa (TheMealDB)
     path('consumo-api/', views.consumo_api, name='consumo_api'),
-    
-    # Eventos externos
+
+    # Segundo servicio externo (JSON Server)
     path('eventos-externos/', views.eventos_externos, name='eventos_externos'),
 ]
